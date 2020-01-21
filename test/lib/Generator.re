@@ -5,7 +5,7 @@ module type MFantasy = {
   let elf_arbitrary: QCheck.arbitrary(Lib.Elf.t);
   let elf_high_arbitrary: QCheck.arbitrary(Lib.Elf.t);
   let troll_arbitrary: QCheck.arbitrary(Lib.Troll.t);
-  let troll_elf_arbitrary: QCheck.arbitrary((Lib.Troll.t, Lib.Elf.t));
+  let troll_elf_arbitrary: QCheck.arbitrary((Lib.Troll.t, Lib.Elf.t)); /*génère un arbitraire(générateur de valeur) de (troll,elfe) */
   let troll_elf_int_arbitrary:
     QCheck.arbitrary((Lib.Troll.t, Lib.Elf.t, int));
   let troll_two_elves_arbitrary:
