@@ -72,6 +72,7 @@ describe("Troll Idempotence", ({test}) => {
         ~name="Troll inverse",
         troll_elf_int_arbitrary,
       ((troll,elf,x)) =>{
+        let x=x+1;
         let tmp=ref(troll);
         for(y in 1 to x){
           tmp:=all_elves_of_a_kind_resurrected(elf,tmp^)
