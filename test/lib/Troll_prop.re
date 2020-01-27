@@ -2,6 +2,7 @@ open Framework;
 open QCheckRely;
 open Generator.Fantasy;
 open Lib.Troll;
+open Lib.Elf;
 
 let {describe} = extendDescribe(QCheckRely.Matchers.matchers);
 
@@ -81,6 +82,40 @@ describe("Troll Idempotence", ({test}) => {
         scoring(tmp^) == scoring(all_elves_of_a_kind_resurrected(elf,troll))
       }
 
+      )
+      |> expect.ext.qCheckTest;
+    ()
+  })
+});
+
+  describe("Troll Metamorphism", ({test}) => {
+    test(
+      "Score troll after killing elfe equals score troll + score elfe",
+      ({expect}) => {
+        QCheck.Test.make(
+          ~count=1000,
+          ~name="Troll inverse",
+          troll_elf_arbitrary,
+          ((troll,elf)) =>
+          scoring(troll|>i_got_one(elf))==scoring(troll)+value(elf)
+        )
+        |> expect.ext.qCheckTest;
+      ()
+    })
+});
+
+describe("Troll injection", ({test}) => {
+  test(
+    "Troll killing elf1 is different than troll killing elf2",
+    ({expect}) => {
+      QCheck.Test.make(
+        ~count=1000,
+        ~name="Troll inverse",
+        troll_two_elves_arbitrary,
+        ((troll,elf1,elf2)) =>{
+        elf1!=elf2?
+          i_got_one(elf1,troll)!=i_got_one(elf2,troll):true      
+      }
       )
       |> expect.ext.qCheckTest;
     ()
